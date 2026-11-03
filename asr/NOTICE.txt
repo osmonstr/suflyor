@@ -1,0 +1,2 @@
+Speech recognition: Vosk (Apache-2.0, https://github.com/alphacep/vosk-api), browser build from vosk-browser
+(Apache-2.0, https://github.com/ccoreilly/vosk-browser), model vosk-model-small-ru-0.22 (Apache-2.0, https://alphacephei.com/vosk/models).
