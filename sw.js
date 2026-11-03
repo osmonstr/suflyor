@@ -6,6 +6,6 @@ addEventListener('fetch',e=>{const q=e.request,u=new URL(q.url);if(q.method!=='G
   if(FONT.test(u.hostname)){e.respondWith(caches.match(q).then(r=>r||fetch(q).then(n=>{const c=n.clone();caches.open(V).then(x=>x.put(q,c));return n})));return}
   if(u.origin!==location.origin||u.pathname.includes('/asr/model'))return;
   if(q.mode==='navigate'){e.respondWith((async()=>{const ctl=new AbortController,t=setTimeout(()=>ctl.abort(),3000);
-      try{const n=await fetch(q.url.split('#')[0],{signal:ctl.signal});clearTimeout(t);if(n.ok){const c=n.clone();(await caches.open(V)).put('./',c)}return n}
+      try{const n=await fetch(q.url.split('#')[0],{signal:ctl.signal,cache:'no-cache'});clearTimeout(t);if(n.ok){const c=n.clone();(await caches.open(V)).put('./',c)}return n}
       catch(er){return (await caches.match('./'))||Response.error()}})());return}
   e.respondWith(caches.match(q,{ignoreSearch:true}).then(r=>r||fetch(q).then(n=>{if(n.ok){const c=n.clone();caches.open(V).then(x=>x.put(q,c))}return n})))});
