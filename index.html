@@ -219,6 +219,9 @@ body.compact.playing #bar{opacity:.62}
 .capsule svg.i{width:20px;height:20px}
 .capsule[aria-pressed="true"],.armed{background:var(--tint)!important;color:var(--tint-ink)!important}
 #dlBtn,#hostLink{flex:none}
+#micSteps{order:-2}
+#hostLink:not([hidden]){order:-1;background:var(--tint);color:var(--tint-ink);min-height:50px;border-radius:14px;font-size:17px;font-weight:600}
+.sheet-body:has(#hostLink:not([hidden])) #kbdGo{background:var(--s-fill);color:var(--s-fg);min-height:44px;border-radius:22px;font-size:15px;font-weight:500}
 
 /* text list */
 .tx{display:flex;align-items:center;gap:6px;padding:0 6px 0 0;min-height:52px}
@@ -975,7 +978,7 @@ function voiceListen(){const SR=SRClass();if(!SR||micPolicyBlocked()){voiceFail(
     r.onend=()=>{if(vRec!==r)return;vRec=null;if(!(vWanted&&voice.on&&playing))voice.live=false;
       if(vWanted&&voice.on&&playing){const now=performance.now();if(now-voice.failT<4000)voice.fails++;else voice.fails=0;voice.failT=now;
         if(voice.fails>6)voiceFail();else setTimeout(()=>{if(vWanted&&voice.on&&playing)voiceListen()},isWebKit()?250:60)}};
-    const tok=++vTok;r.start();setTimeout(()=>{if(tok===vTok&&vRec===r&&!voice.live)voiceFail()},12000)}catch(e){voiceFail()}}
+    const tok=++vTok;r.start();setTimeout(()=>{if(tok===vTok&&vRec===r&&!voice.live)voiceFail()},45000)}catch(e){voiceFail()}}
 function voiceHush(){vWanted=false;voice.live=false;$('voiceChip').hidden=true;if(vRec){const r=vRec;vRec=null;try{r.stop()}catch(e){}}}
 function voiceFail(){srFailed=true;voice.on=false;voiceHush();$('voiceBtn').setAttribute('aria-pressed','false');
   if(playing)toggle(false);openMic()}
